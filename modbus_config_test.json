@@ -1,0 +1,141 @@
+{
+    "port_name" : "/dev/ttyS0",
+    "update" : 1,
+    "config" : [
+        {
+            "slave_id" : 172,
+            "param" : [
+                {
+                    "name" : "batt_type",
+                    "value" : 0
+                },
+                {
+                    "name" : "system_voltage",
+                    "value" : 12336
+                },
+                {
+                    "name" : "overvoltage_threshold",
+                    "value" : 160
+                },
+                {
+                    "name" : "charging_voltage_limit",
+                    "value" : 155
+                },
+                {
+                    "name" : "over_discharge_recovery_voltage",
+                    "value" : 127
+                },
+                {
+                    "name" : "under_voltage_threshold",
+                    "value" : 122
+                },
+                {
+                    "name" : "over_discharge_voltage",
+                    "value" : 122
+                },
+                {
+                    "name" : "over_discharge_limit_voltage",
+                    "value" : 117
+                },
+                {
+                    "name" : "over_discharge_time_delay",
+                    "value" : 5
+                },
+                {
+                    "name" : "load_mode",
+                    "value" : 17
+                }
+            ]
+        },
+        {
+            "slave_id" : 173,
+            "param" : [
+                {
+                    "name" : "batt_type",
+                    "value" : 0
+                },
+                {
+                    "name" : "system_voltage",
+                    "value" : 12336
+                },
+                {
+                    "name" : "overvoltage_threshold",
+                    "value" : 160
+                },
+                {
+                    "name" : "charging_voltage_limit",
+                    "value" : 155
+                },
+                {
+                    "name" : "over_discharge_recovery_voltage",
+                    "value" : 127
+                },
+                {
+                    "name" : "under_voltage_threshold",
+                    "value" : 122
+                },
+                {
+                    "name" : "over_discharge_voltage",
+                    "value" : 122
+                },
+                {
+                    "name" : "over_discharge_limit_voltage",
+                    "value" : 117
+                },
+                {
+                    "name" : "over_discharge_time_delay",
+                    "value" : 5
+                },
+                {
+                    "name" : "load_mode",
+                    "value" : 17
+                }
+            ]
+        },
+        {
+            "slave_id" : 174,
+            "param" : [
+                {
+                    "name" : "batt_type",
+                    "value" : 0
+                },
+                {
+                    "name" : "system_voltage",
+                    "value" : 12336
+                },
+                {
+                    "name" : "overvoltage_threshold",
+                    "value" : 160
+                },
+                {
+                    "name" : "charging_voltage_limit",
+                    "value" : 155
+                },
+                {
+                    "name" : "over_discharge_recovery_voltage",
+                    "value" : 127
+                },
+                {
+                    "name" : "under_voltage_threshold",
+                    "value" : 122
+                },
+                {
+                    "name" : "over_discharge_voltage",
+                    "value" : 122
+                },
+                {
+                    "name" : "over_discharge_limit_voltage",
+                    "value" : 117
+                },
+                {
+                    "name" : "over_discharge_time_delay",
+                    "value" : 5
+                },
+                {
+                    "name" : "load_mode",
+                    "value" : 17
+                }
+            ]
+        }
+    ]
+}

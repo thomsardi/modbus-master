@@ -1,0 +1,79 @@
+{
+    "port_name" : "/dev/ttyS0",
+    "update" : 0,
+    "config" : [
+        {
+            "slave_id" : 172,
+            "param" : [
+                {
+                    "name" : "batt_type",
+                    "value" : 0
+                },
+                {
+                    "name" : "system_voltage",
+                    "value" : 12336
+                },
+                {
+                    "name" : "overvoltage_threshold",
+                    "value" : 160
+                },
+                {
+                    "name" : "charging_voltage_limit",
+                    "value" : 155
+                },
+                {
+                    "name" : "equalizing_charging_voltage",
+                    "value" : 146
+                },
+                {
+                    "name" : "boost_charging_voltage",
+                    "value" : 144
+                },
+                {
+                    "name" : "floating_charging_voltage",
+                    "value" : 138
+                },
+                {
+                    "name" : "boost_charging_recovery_voltage",
+                    "value" : 126
+                },
+                {
+                    "name" : "over_discharge_recovery_voltage",
+                    "value" : 126
+                },
+                {
+                    "name" : "under_voltage_threshold",
+                    "value" : 120
+                },
+                {
+                    "name" : "over_discharge_voltage",
+                    "value" : 110
+                },
+                {
+                    "name" : "over_discharge_limit_voltage",
+                    "value" : 105
+                },
+                {
+                    "name" : "over_discharge_time_delay",
+                    "value" : 5
+                },
+                {
+                    "name" : "equalizing_charging_time",
+                    "value" : 120
+                },
+                {
+                    "name" : "boost_charging_time",
+                    "value" : 120
+                },
+                {
+                    "name" : "equalizing_charging_interval",
+                    "value" : 30
+                },
+                {
+                    "name" : "temperature_compensation",
+                    "value" : 3
+                }
+            ]
+        }
+    ]
+}
