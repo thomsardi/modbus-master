@@ -8,6 +8,14 @@
                 {
                     "name": "charging_voltage_limit",
                     "value": 155
+                },
+                {
+                    "name": "load_mode",
+                    "value": 15
+                },
+                {
+                    "name" : "load_command",
+                    "value" : 1
                 }
             ]
         },
@@ -52,7 +60,11 @@
                 },
                 {
                     "name": "load_mode",
-                    "value": 17
+                    "value": 15
+                },
+                {
+                    "name" : "load_command",
+                    "value" : 1
                 }
             ]
         },
@@ -97,7 +109,11 @@
                 },
                 {
                     "name": "load_mode",
-                    "value": 17
+                    "value": 15
+                },
+                {
+                    "name" : "load_command",
+                    "value" : 1
                 }
             ]
         }

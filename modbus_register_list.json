@@ -119,6 +119,11 @@
                     "name" : "load_mode",
                     "start_register" : 57373,
                     "quantity" : 1
+                },
+                {
+                    "name" : "load_command",
+                    "start_register" : 266,
+                    "quantity" : 1
                 }
             ]
         },
@@ -241,6 +246,11 @@
                     "name" : "load_mode",
                     "start_register" : 57373,
                     "quantity" : 1
+                },
+                {
+                    "name" : "load_command",
+                    "start_register" : 266,
+                    "quantity" : 1
                 }
             ]
         },
@@ -362,6 +372,11 @@
                 {
                     "name" : "load_mode",
                     "start_register" : 57373,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "load_command",
+                    "start_register" : 266,
                     "quantity" : 1
                 }
             ]
