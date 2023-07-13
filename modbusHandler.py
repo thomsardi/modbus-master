@@ -1,12 +1,19 @@
 from pymodbus.client.sync import ModbusSerialClient
 import threading
 import queue
-import json
 import copy
 import time
 
 class ModbusRegisterList() :
+    """
+    Class to convert the dict config file into slaveId, list of read register and list of write register
+    """
     def __init__(self, configFile : dict) -> None:
+        """Class initialization
+
+        Args :
+        configFile (dict) : config file as dict type file, refer to modbus_register_list.json
+        """
         self.slaveid = configFile['slave_id']
         self.writeSection : list[dict] = []
         for element in configFile['write_section'] :
@@ -16,6 +23,9 @@ class ModbusRegisterList() :
             self.readSection.append(element)
 
     def printAll(self) :
+        """
+        Print the parsed config file
+        """
         print(self.slaveid)
         for element in self.readSection :
             print(element)
@@ -23,13 +33,30 @@ class ModbusRegisterList() :
             print(element)
 
 class ModbusMessage() :
+    """ ModbusMessage class that contain the slaveid, register name, and value. 
+    This message will pass into ModbusHandler to be processed
+    """
     def __init__(self, slaveId : int, name : str, value : int) -> None:
+        """Class initialization
+
+        Args :
+        slaveId (int) : slave address destination
+        name (str) : register name, refer to modbus_register_list on write_section key
+        value (int) : value to be written into register
+        """
         self.slaveId = slaveId
         self.name = name
         self.value = value
 
 class ModbusHandler(threading.Thread) :
+    """ ModbusHandler is a thread class that handle the reading and writing of modbus data. Treat this class as a threading.Thread
+    """
     def __init__(self, modbusRegisterList : list[ModbusRegisterList]):
+        """ Class initialization
+        
+        Args:
+        modbusRegisterList (list[ModbusRegisterList]) : list of ModbusRegisterList, this argument is a guide book to which register to read and write
+        """
         threading.Thread.__init__(self)
         self.modbusSerialClient : ModbusSerialClient = None
         self.daemon = True
@@ -39,9 +66,20 @@ class ModbusHandler(threading.Thread) :
         self.inc = 0
 
     def putToQueue(self, modbusMessage : ModbusMessage) :
+        """ Put the modbus message into class queue to be further processed
+        
+        Args :
+        modbusMessage(ModbusMessage) : modbusMessage, refer into ModbusMessage class
+        """
         self.writeQueue.put(modbusMessage)
 
     def setModbus(self, modbusSerialClient : ModbusSerialClient) :
+        """ Register the modbus serial object, before run this class thread, 
+        set the modbus serial object first or else the data won't send into serial port line
+        
+        Args :
+        modbusSerialClient (ModbusSerialClient) : modbus serial object, refer to ModbusSerialClient
+        """
         self.modbusSerialClient = modbusSerialClient
 
     def run(self) :
@@ -50,7 +88,7 @@ class ModbusHandler(threading.Thread) :
             if self.inc >= len(self.modbusRegisterList) :
                 self.inc = 0
             
-            while not self.writeQueue.empty() :
+            while not self.writeQueue.empty() : #check if the writequeue not empty
                 message : ModbusMessage = self.writeQueue.get()
                 startRegister = self.getWriteRegisterAddress(message)
                 print("Slave Id : ", message.slaveId)
@@ -86,6 +124,14 @@ class ModbusHandler(threading.Thread) :
             self.inc += 1
     
     def getWriteRegisterAddress(self, modbusMessage : ModbusMessage) -> int :
+        """ Get the address of register. Since the ModbusMessage contain only register name not the address, it need to search the suitable address
+        
+        Args :
+        modbusMessage (ModbusMessage) : refer to ModbusMessage class. contain the register name, slaveid and value
+        
+        Returns :
+        int : register address
+        """
         for element in self.modbusRegisterList :
             if element.slaveid == modbusMessage.slaveId :
                 for write in element.writeSection :

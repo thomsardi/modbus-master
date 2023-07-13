@@ -35,7 +35,7 @@
                 },
                 {
                     "name" : "boost_charging_recovery_voltage",
-                    "value" : 126
+                    "value" : 132
                 },
                 {
                     "name" : "over_discharge_recovery_voltage",
@@ -47,11 +47,11 @@
                 },
                 {
                     "name" : "over_discharge_voltage",
-                    "value" : 110
+                    "value" : 111
                 },
                 {
                     "name" : "over_discharge_limit_voltage",
-                    "value" : 105
+                    "value" : 106
                 },
                 {
                     "name" : "over_discharge_time_delay",
@@ -72,6 +72,14 @@
                 {
                     "name" : "temperature_compensation",
                     "value" : 3
+                },
+                {
+                    "name": "load_mode",
+                    "value": 15
+                },
+                {
+                    "name" : "load_command",
+                    "value" : 1
                 }
             ]
         }

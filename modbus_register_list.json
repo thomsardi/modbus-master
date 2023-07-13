@@ -6,7 +6,7 @@
                 {
                     "name" : "batt_load_solar_info",
                     "start_register" : 256,
-                    "quantity" : 10
+                    "quantity" : 11
                 },
                 {
                     "name" : "battery_setting",
@@ -133,7 +133,7 @@
                 {
                     "name" : "batt_load_solar_info",
                     "start_register" : 256,
-                    "quantity" : 10
+                    "quantity" : 11
                 },
                 {
                     "name" : "battery_setting",
@@ -260,7 +260,7 @@
                 {
                     "name" : "batt_load_solar_info",
                     "start_register" : 256,
-                    "quantity" : 10
+                    "quantity" : 11
                 },
                 {
                     "name" : "battery_setting",

@@ -6,8 +6,72 @@
             "slave_id": 172,
             "param": [
                 {
-                    "name": "charging_voltage_limit",
-                    "value": 155
+                    "name" : "batt_type",
+                    "value" : 0
+                },
+                {
+                    "name" : "system_voltage",
+                    "value" : 12336
+                },
+                {
+                    "name" : "overvoltage_threshold",
+                    "value" : 148
+                },
+                {
+                    "name" : "charging_voltage_limit",
+                    "value" : 147
+                },
+                {
+                    "name" : "equalizing_charging_voltage",
+                    "value" : 146
+                },
+                {
+                    "name" : "boost_charging_voltage",
+                    "value" : 144
+                },
+                {
+                    "name" : "floating_charging_voltage",
+                    "value" : 138
+                },
+                {
+                    "name" : "boost_charging_recovery_voltage",
+                    "value" : 132
+                },
+                {
+                    "name" : "over_discharge_recovery_voltage",
+                    "value" : 126
+                },
+                {
+                    "name" : "under_voltage_threshold",
+                    "value" : 120
+                },
+                {
+                    "name" : "over_discharge_voltage",
+                    "value" : 111
+                },
+                {
+                    "name" : "over_discharge_limit_voltage",
+                    "value" : 106
+                },
+                {
+                    "name" : "over_discharge_time_delay",
+                    "value" : 5
+                },
+                {
+                    "name" : "equalizing_charging_time",
+                    "value" : 0
+                },
+                {
+                    "name" : "boost_charging_time",
+                    "value" : 120
+                },
+                {
+                    "name" : "equalizing_charging_interval",
+                    "value" : 0
+                },
+                {
+                    "name" : "temperature_compensation",
+                    "value" : 0
                 },
                 {
                     "name": "load_mode",
@@ -23,40 +87,72 @@
             "slave_id": 173,
             "param": [
                 {
-                    "name": "batt_type",
-                    "value": 0
+                    "name" : "batt_type",
+                    "value" : 0
                 },
                 {
-                    "name": "system_voltage",
-                    "value": 12336
+                    "name" : "system_voltage",
+                    "value" : 12336
                 },
                 {
-                    "name": "overvoltage_threshold",
-                    "value": 160
+                    "name" : "overvoltage_threshold",
+                    "value" : 148
                 },
                 {
-                    "name": "charging_voltage_limit",
-                    "value": 155
+                    "name" : "charging_voltage_limit",
+                    "value" : 147
                 },
                 {
-                    "name": "over_discharge_recovery_voltage",
-                    "value": 127
+                    "name" : "equalizing_charging_voltage",
+                    "value" : 146
                 },
                 {
-                    "name": "under_voltage_threshold",
-                    "value": 122
+                    "name" : "boost_charging_voltage",
+                    "value" : 144
                 },
                 {
-                    "name": "over_discharge_voltage",
-                    "value": 122
+                    "name" : "floating_charging_voltage",
+                    "value" : 138
                 },
                 {
-                    "name": "over_discharge_limit_voltage",
-                    "value": 117
+                    "name" : "boost_charging_recovery_voltage",
+                    "value" : 132
                 },
                 {
-                    "name": "over_discharge_time_delay",
-                    "value": 5
+                    "name" : "over_discharge_recovery_voltage",
+                    "value" : 126
+                },
+                {
+                    "name" : "under_voltage_threshold",
+                    "value" : 120
+                },
+                {
+                    "name" : "over_discharge_voltage",
+                    "value" : 111
+                },
+                {
+                    "name" : "over_discharge_limit_voltage",
+                    "value" : 106
+                },
+                {
+                    "name" : "over_discharge_time_delay",
+                    "value" : 5
+                },
+                {
+                    "name" : "equalizing_charging_time",
+                    "value" : 0
+                },
+                {
+                    "name" : "boost_charging_time",
+                    "value" : 120
+                },
+                {
+                    "name" : "equalizing_charging_interval",
+                    "value" : 0
+                },
+                {
+                    "name" : "temperature_compensation",
+                    "value" : 0
                 },
                 {
                     "name": "load_mode",
@@ -72,40 +168,72 @@
             "slave_id": 174,
             "param": [
                 {
-                    "name": "batt_type",
-                    "value": 0
+                    "name" : "batt_type",
+                    "value" : 0
                 },
                 {
-                    "name": "system_voltage",
-                    "value": 12336
+                    "name" : "system_voltage",
+                    "value" : 12336
                 },
                 {
-                    "name": "overvoltage_threshold",
-                    "value": 160
+                    "name" : "overvoltage_threshold",
+                    "value" : 148
                 },
                 {
-                    "name": "charging_voltage_limit",
-                    "value": 155
+                    "name" : "charging_voltage_limit",
+                    "value" : 147
                 },
                 {
-                    "name": "over_discharge_recovery_voltage",
-                    "value": 127
+                    "name" : "equalizing_charging_voltage",
+                    "value" : 146
                 },
                 {
-                    "name": "under_voltage_threshold",
-                    "value": 122
+                    "name" : "boost_charging_voltage",
+                    "value" : 144
                 },
                 {
-                    "name": "over_discharge_voltage",
-                    "value": 122
+                    "name" : "floating_charging_voltage",
+                    "value" : 138
                 },
                 {
-                    "name": "over_discharge_limit_voltage",
-                    "value": 117
+                    "name" : "boost_charging_recovery_voltage",
+                    "value" : 132
                 },
                 {
-                    "name": "over_discharge_time_delay",
-                    "value": 5
+                    "name" : "over_discharge_recovery_voltage",
+                    "value" : 126
+                },
+                {
+                    "name" : "under_voltage_threshold",
+                    "value" : 120
+                },
+                {
+                    "name" : "over_discharge_voltage",
+                    "value" : 111
+                },
+                {
+                    "name" : "over_discharge_limit_voltage",
+                    "value" : 106
+                },
+                {
+                    "name" : "over_discharge_time_delay",
+                    "value" : 5
+                },
+                {
+                    "name" : "equalizing_charging_time",
+                    "value" : 0
+                },
+                {
+                    "name" : "boost_charging_time",
+                    "value" : 120
+                },
+                {
+                    "name" : "equalizing_charging_interval",
+                    "value" : 0
+                },
+                {
+                    "name" : "temperature_compensation",
+                    "value" : 0
                 },
                 {
                     "name": "load_mode",
