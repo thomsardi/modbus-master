@@ -2,7 +2,7 @@ from pymodbus.client.sync import ModbusSerialClient
 from modbusHandler import ModbusHandler, ModbusRegisterList, ModbusMessage
 import json
 import time
-
+from httpserver import Server
 
 def main() :
     registerListFile = json.load(open('modbus_register_list.json')) #convert the json file into dict
@@ -76,6 +76,8 @@ if __name__ == "__main__" :
     modbusHandler = ModbusHandler(modbusRegisterList) #create ModbusHandler object
     modbusHandler.setModbus(client) #register the ModbusSerialClient into ModbusHandler
 
+    server = Server("httpThread", modbusHandler.mpptDataCollection, modbusHandler)
+
     """
     to update parameter, isUpdate flag, register name and value is taken from modbus_config.json
     register name must be within modbus_register_list.json or else it fails to update
@@ -93,6 +95,7 @@ if __name__ == "__main__" :
     # modbusHandler.putToQueue(ModbusMessage(172, "floating_charging_voltage", 3000))
     
     modbusHandler.start()
+    server.start()
     while(1) :
         time.sleep(0.1)
     # modbusHandler.stop()

@@ -1,0 +1,385 @@
+{
+    "device" : [
+        {
+            "slave_id" : 172,
+            "read_section" : [
+                {
+                    "name" : "batt_load_solar_info",
+                    "start_register" : 256,
+                    "quantity" : 11
+                },
+                {
+                    "name" : "battery_setting",
+                    "start_register" : 57349,
+                    "quantity" : 16
+                },
+                {
+                    "name" : "load_mode",
+                    "start_register" : 57373,
+                    "quantity" : 1
+                }
+            ],
+            "write_section" : [
+                {
+                    "name" : "batt_cap",
+                    "start_register" : 57346,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "system_voltage",
+                    "start_register" : 57347,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "batt_type",
+                    "start_register" : 57348,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "overvoltage_threshold",
+                    "start_register" : 57349,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "charging_voltage_limit",
+                    "start_register" : 57350,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "equalizing_charging_voltage",
+                    "start_register" : 57351,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "boost_charging_voltage",
+                    "start_register" : 57352,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "floating_charging_voltage",
+                    "start_register" : 57353,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "boost_charging_recovery_voltage",
+                    "start_register" : 57354,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "over_discharge_recovery_voltage",
+                    "start_register" : 57355,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "under_voltage_threshold",
+                    "start_register" : 57356,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "over_discharge_voltage",
+                    "start_register" : 57357,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "over_discharge_limit_voltage",
+                    "start_register" : 57358,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "end_of_charge_discharge_capacity",
+                    "start_register" : 57359,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "over_discharge_time_delay",
+                    "start_register" : 57360,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "equalizing_charging_time",
+                    "start_register" : 57361,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "boost_charging_time",
+                    "start_register" : 57362,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "equalizing_charging_interval",
+                    "start_register" : 57363,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "temperature_compensation",
+                    "start_register" : 57364,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "load_mode",
+                    "start_register" : 57373,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "load_command",
+                    "start_register" : 266,
+                    "quantity" : 1
+                }
+            ]
+        },
+        {
+            "slave_id" : 173,
+            "read_section" : [
+                {
+                    "name" : "batt_load_solar_info",
+                    "start_register" : 256,
+                    "quantity" : 11
+                },
+                {
+                    "name" : "battery_setting",
+                    "start_register" : 57349,
+                    "quantity" : 16
+                },
+                {
+                    "name" : "load_mode",
+                    "start_register" : 57373,
+                    "quantity" : 1
+                }
+            ],
+            "write_section" : [
+                {
+                    "name" : "batt_cap",
+                    "start_register" : 57346,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "system_voltage",
+                    "start_register" : 57347,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "batt_type",
+                    "start_register" : 57348,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "overvoltage_threshold",
+                    "start_register" : 57349,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "charging_voltage_limit",
+                    "start_register" : 57350,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "equalizing_charging_voltage",
+                    "start_register" : 57351,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "boost_charging_voltage",
+                    "start_register" : 57352,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "floating_charging_voltage",
+                    "start_register" : 57353,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "boost_charging_recovery_voltage",
+                    "start_register" : 57354,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "over_discharge_recovery_voltage",
+                    "start_register" : 57355,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "under_voltage_threshold",
+                    "start_register" : 57356,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "over_discharge_voltage",
+                    "start_register" : 57357,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "over_discharge_limit_voltage",
+                    "start_register" : 57358,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "end_of_charge_discharge_capacity",
+                    "start_register" : 57359,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "over_discharge_time_delay",
+                    "start_register" : 57360,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "equalizing_charging_time",
+                    "start_register" : 57361,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "boost_charging_time",
+                    "start_register" : 57362,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "equalizing_charging_interval",
+                    "start_register" : 57363,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "temperature_compensation",
+                    "start_register" : 57364,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "load_mode",
+                    "start_register" : 57373,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "load_command",
+                    "start_register" : 266,
+                    "quantity" : 1
+                }
+            ]
+        },
+        {
+            "slave_id" : 174,
+            "read_section" : [
+                {
+                    "name" : "batt_load_solar_info",
+                    "start_register" : 256,
+                    "quantity" : 11
+                },
+                {
+                    "name" : "battery_setting",
+                    "start_register" : 57349,
+                    "quantity" : 16
+                },
+                {
+                    "name" : "load_mode",
+                    "start_register" : 57373,
+                    "quantity" : 1
+                }
+            ],
+            "write_section" : [
+                {
+                    "name" : "batt_cap",
+                    "start_register" : 57346,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "system_voltage",
+                    "start_register" : 57347,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "batt_type",
+                    "start_register" : 57348,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "overvoltage_threshold",
+                    "start_register" : 57349,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "charging_voltage_limit",
+                    "start_register" : 57350,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "equalizing_charging_voltage",
+                    "start_register" : 57351,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "boost_charging_voltage",
+                    "start_register" : 57352,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "floating_charging_voltage",
+                    "start_register" : 57353,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "boost_charging_recovery_voltage",
+                    "start_register" : 57354,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "over_discharge_recovery_voltage",
+                    "start_register" : 57355,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "under_voltage_threshold",
+                    "start_register" : 57356,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "over_discharge_voltage",
+                    "start_register" : 57357,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "over_discharge_limit_voltage",
+                    "start_register" : 57358,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "end_of_charge_discharge_capacity",
+                    "start_register" : 57359,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "over_discharge_time_delay",
+                    "start_register" : 57360,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "equalizing_charging_time",
+                    "start_register" : 57361,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "boost_charging_time",
+                    "start_register" : 57362,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "equalizing_charging_interval",
+                    "start_register" : 57363,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "temperature_compensation",
+                    "start_register" : 57364,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "load_mode",
+                    "start_register" : 57373,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "load_command",
+                    "start_register" : 266,
+                    "quantity" : 1
+                }
+            ]
+        }
+    ]
+}

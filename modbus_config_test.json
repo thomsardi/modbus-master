@@ -1,6 +1,6 @@
 {
-    "port_name": "/dev/ttyS0",
-    "update": 1,
+    "port_name": "COM7",
+    "update": 0,
     "config": [
         {
             "slave_id": 172,
