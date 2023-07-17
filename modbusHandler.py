@@ -20,6 +20,7 @@ class Info() :
     def __init__(self) -> None:
         self.slaveId : int = 0
         self.counter : int = 0
+        self.lastCounter : int = 0
         self.batCapacity : int = 0
         self.batVoltage : int = 0
         self.chargeCurrent : int = 0
@@ -36,6 +37,7 @@ class Info() :
     def print(self):
         print("slave id :", self.slaveId)
         print("counter :", self.counter)
+        print("counter before :", self.lastCounter)
         print("battery capacity :", self.batCapacity)
         print("battery voltage :", self.batVoltage)
         print("charge current :", self.chargeCurrent)
@@ -53,6 +55,7 @@ class Setting() :
     def __init__(self) -> None:
         self.slaveId : int = 0
         self.counter : int = 0
+        self.lastCounter : int = 0
         self.overVoltageThreshold = 0
         self.chargingLimitVoltage = 0
         self.equalizingChargingVoltage = 0
@@ -97,6 +100,7 @@ class LoadMode() :
         self.slaveId : int = 0
         self.loadMode : int = 0
         self.counter : int = 0
+        self.lastCounter : int = 0
     
     def print(self) :
         print("slave id :", self.slaveId)
@@ -107,6 +111,7 @@ class LoadInfo() :
     def __init__(self) -> None:
         self.slaveId : int = 0
         self.counter : int = 0
+        self.lastCounter : int = 0
         self.loadStatus : int = 0
         self.loadBrightness : int = 0
         self.chargingState : int = 0
@@ -207,10 +212,30 @@ class MpptDataCollection() :
         for element in self.settingList :
             element.print()
 
-    def insertData(self, mpptData : MpptData) -> None:
+    def cleanUp(self) :
+        for index0, element in enumerate(self.infoList) :
+            if element.counter == element.lastCounter :
+                print("remove old data")
+                for index1, setting in enumerate(self.settingList) :
+                    if element.slaveId == setting.slaveId :
+                        self.settingList.pop(index1)
+                for index2, loadMode in enumerate(self.loadModeList) :
+                    if element.slaveId == loadMode.slaveId :
+                        self.loadModeList.pop(index2)
+                for index3, loadInfo in enumerate(self.loadInfoList) :
+                    if element.slaveId == loadInfo.slaveId :
+                        self.loadInfoList.pop(index3)
+                self.infoList.pop(index0)
+                pass
+            else :
+                self.infoList[index0].lastCounter = self.infoList[index0].counter
 
-        # print("info length :", len(self.infoList))
-        # print("setting length :", len(self.settingList))
+    def insertData(self, mpptData : MpptData) -> None:
+        """Insert the data into a list. it first check for an existing data, if found it will overwrite the data, if not it will insert the data
+        
+        Args :
+        mpptData (MpptData) : MpptData object converting from modbus response register
+        """
 
         if (mpptData.info is not None) :
             for index, element in enumerate(self.infoList) :
@@ -278,6 +303,12 @@ class MpptDataCollection() :
             self.loadInfoList.append(mpptData.loadInfo)
 
     def getInfo(self) -> list[dict] :
+        """
+        Convert from list of Info data into dictionary JSON file for http request
+
+        Returns :
+        list[dict] : list of dictionary, the number of list is equal as the number of stored Info object data
+        """
         result : list[dict] = []
         for element in self.infoList :
             dataDict :dict = {
@@ -307,12 +338,18 @@ class MpptDataCollection() :
         return result
     
     def getSetting(self) -> list[dict] :
+        """
+        Convert from list of Setting data into dictionary JSON file for http request
+
+        Returns :
+        list[dict] : list of dictionary, the number of list is equal as the number of stored Setting object data
+        """
         result : list[dict] = []
         for element in self.settingList :
             dataDict :dict = {
                 "slave_id" : element.slaveId,
                 "counter" : element.counter,
-                "over_voltage_threshold" : element.overVoltageThreshold,
+                "overvoltage_threshold" : element.overVoltageThreshold,
                 "charging_limit_voltage" : element.chargingLimitVoltage,
                 "equalizing_charging_voltage" : element.equalizingChargingVoltage,
                 "boost_charging_voltage" : element.boostChargingVoltage,

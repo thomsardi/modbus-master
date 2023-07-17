@@ -96,8 +96,15 @@ if __name__ == "__main__" :
     
     modbusHandler.start()
     server.start()
+    count = 0
     while(1) :
         time.sleep(0.1)
+        print("length :", len(modbusHandler.mpptDataCollection.infoList))
+        count += 1
+        if count >= 50 :
+            modbusHandler.mpptDataCollection.cleanUp()
+            count = 0
+            pass
     # modbusHandler.stop()
 
     
