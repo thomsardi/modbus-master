@@ -11,6 +11,31 @@ class Server(threading.Thread) :
         self.data : MpptDataCollection = data
         self.modbusHandler : ModbusHandler = modbusHandler
 
+        @self.app.route('/write', methods=['POST', 'GET'])
+        def writeRegister() :
+            if request.method == 'POST':
+                try :
+                    data = request.json
+                    slaveId = data['slave_id']
+                    registerName = data['register_name']
+                    value = data['value']
+                    message = ModbusMessage(slaveId, registerName, value)
+                    self.modbusHandler.putToQueue(message)
+                    
+                    response = {
+                        "code": "200",
+                        "msg": "SEND_SUCCESS",
+                        "status": True
+                    }
+                    return make_response(response, 200)
+                except :
+                    response = {
+                        "code": "400",
+                        "msg": "BAD_REQUEST",
+                        "status": False
+                    }
+                    return make_response(response, 400)
+        
         @self.app.route('/load-command', methods=['POST', 'GET'])
         def loadCommand() :
             if request.method == 'POST':

@@ -12,6 +12,16 @@
                     "name" : "battery_setting",
                     "start_register" : 57349,
                     "quantity" : 16
+                },
+                {
+                    "name" : "load_mode",
+                    "start_register" : 57373,
+                    "quantity" : 1
+                },
+                {
+                    "name" : "load_info",
+                    "start_register" : 288,
+                    "quantity" : 1
                 }
             ],
             "write_section" : [

@@ -92,11 +92,39 @@ class Setting() :
         print("equalizing charging interval :", self.equalizingChargingInterval)
         print("temperature compensation :", self.temperatureCompensation)
 
+class LoadMode() :
+    def __init__(self) -> None:
+        self.slaveId : int = 0
+        self.loadMode : int = 0
+        self.counter : int = 0
+    
+    def print(self) :
+        print("slave id :", self.slaveId)
+        print("counter :", self.counter)
+        print("load mode :", self.loadMode)
+
+class LoadInfo() :
+    def __init__(self) -> None:
+        self.slaveId : int = 0
+        self.counter : int = 0
+        self.loadStatus : int = 0
+        self.loadBrightness : int = 0
+        self.chargingState : int = 0
+    
+    def print(self) :
+        print("slave id :", self.slaveId)
+        print("counter :", self.counter)
+        print("load status :", self.loadStatus)
+        print("load brightness :", self.loadBrightness)
+        print("charging state :", self.chargingState)
+
 class MpptData() :
     def __init__(self, modbusResponseBuffer : ModbusResponseBuffer) -> None:
         self.slaveId : int = 0
         self.info : Info = None
         self.setting : Setting = None
+        self.loadMode : LoadMode = None
+        self.loadInfo : LoadInfo = None
         self.buildData(modbusResponseBuffer)
 
     def print(self):
@@ -147,6 +175,22 @@ class MpptData() :
             setting.equalizingChargingInterval = modbusResponseBuffer.register[14]
             setting.temperatureCompensation = modbusResponseBuffer.register[15]
             self.setting = copy.deepcopy(setting)
+        elif (modbusResponseBuffer.identifier == "load_mode") :
+            print("load mode")
+            loadMode = LoadMode()
+            self.slaveId = modbusResponseBuffer.slaveId
+            loadMode.slaveId = modbusResponseBuffer.slaveId
+            loadMode.loadMode = modbusResponseBuffer.register[0]
+            self.loadMode = copy.deepcopy(loadMode)
+        elif (modbusResponseBuffer.identifier == "load_info") :
+            print("load info")
+            loadInfo = LoadInfo()
+            self.slaveId = modbusResponseBuffer.slaveId
+            loadInfo.slaveId = modbusResponseBuffer.slaveId
+            loadInfo.loadStatus = modbusResponseBuffer.register[0] >> 15
+            loadInfo.loadBrightness = (modbusResponseBuffer.register[0] >> 8) & 0x7F
+            loadInfo.chargingState = modbusResponseBuffer.register[0] & 0xFF
+            self.loadInfo = copy.deepcopy(loadInfo)
         else :
             print("Unidentified identifier")
 
@@ -154,6 +198,8 @@ class MpptDataCollection() :
     def __init__(self) -> None:
         self.infoList : list[Info] = []
         self.settingList : list[Setting] = []
+        self.loadModeList : list[LoadMode] = []
+        self.loadInfoList : list[LoadInfo] = []
 
     def print(self) :
         for element in self.infoList :
@@ -163,53 +209,73 @@ class MpptDataCollection() :
 
     def insertData(self, mpptData : MpptData) -> None:
 
-        print("info length :", len(self.infoList))
-        print("setting length :", len(self.settingList))
+        # print("info length :", len(self.infoList))
+        # print("setting length :", len(self.settingList))
 
         if (mpptData.info is not None) :
             for index, element in enumerate(self.infoList) :
                 if element.slaveId == mpptData.slaveId :
-                    self.infoList[index].slaveId = element.slaveId
+                    self.infoList[index].slaveId = mpptData.slaveId
                     self.infoList[index].counter += 1
-                    self.infoList[index].batCapacity = element.batCapacity
-                    self.infoList[index].batVoltage = element.batVoltage
-                    self.infoList[index].chargeCurrent = element.chargeCurrent
-                    self.infoList[index].controllerTemperature = element.controllerTemperature
-                    self.infoList[index].batteryTemperature = element.batteryTemperature
-                    self.infoList[index].loadVoltage = element.loadVoltage
-                    self.infoList[index].loadCurrent = element.loadCurrent
-                    self.infoList[index].loadPower = element.loadPower
-                    self.infoList[index].pvVoltage = element.pvVoltage
-                    self.infoList[index].pvCurrent = element.pvCurrent
-                    self.infoList[index].pvPower = element.pvPower
-                    self.infoList[index].loadStatus = element.loadStatus
+                    self.infoList[index].batCapacity = mpptData.info.batCapacity
+                    self.infoList[index].batVoltage = mpptData.info.batVoltage
+                    self.infoList[index].chargeCurrent = mpptData.info.chargeCurrent
+                    self.infoList[index].controllerTemperature = mpptData.info.controllerTemperature
+                    self.infoList[index].batteryTemperature = mpptData.info.batteryTemperature
+                    self.infoList[index].loadVoltage = mpptData.info.loadVoltage
+                    self.infoList[index].loadCurrent = mpptData.info.loadCurrent
+                    self.infoList[index].loadPower = mpptData.info.loadPower
+                    self.infoList[index].pvVoltage = mpptData.info.pvVoltage
+                    self.infoList[index].pvCurrent = mpptData.info.pvCurrent
+                    self.infoList[index].pvPower = mpptData.info.pvPower
+                    self.infoList[index].loadStatus = mpptData.info.loadStatus
+                    # print("Load Status :", self.infoList[index].loadStatus)
                     return
             self.infoList.append(mpptData.info)
         
         if (mpptData.setting is not None) :
             for index, element in enumerate(self.settingList) :
                 if element.slaveId == mpptData.slaveId :
-                    self.settingList[index].slaveId = element.slaveId
+                    self.settingList[index].slaveId = mpptData.setting.slaveId
                     self.settingList[index].counter += 1
-                    self.settingList[index].overVoltageThreshold = element.overVoltageThreshold
-                    self.settingList[index].chargingLimitVoltage = element.chargingLimitVoltage
-                    self.settingList[index].equalizingChargingVoltage = element.equalizingChargingVoltage
-                    self.settingList[index].boostChargingVoltage = element.boostChargingVoltage
-                    self.settingList[index].floatingChargingVoltage = element.floatingChargingVoltage
-                    self.settingList[index].boostChargingRecoveryVoltage = element.boostChargingRecoveryVoltage
-                    self.settingList[index].overDischargeRecoveryVoltage = element.overDischargeRecoveryVoltage
-                    self.settingList[index].underVoltageThreshold = element.underVoltageThreshold
-                    self.settingList[index].overDischargeVoltage = element.overDischargeVoltage
-                    self.settingList[index].overDischargeLimitVoltage = element.overDischargeLimitVoltage
-                    self.settingList[index].endOfCharge = element.endOfCharge
-                    self.settingList[index].endOfDischarge = element.endOfDischarge
-                    self.settingList[index].overDischargeTimeDelay = element.overDischargeTimeDelay
-                    self.settingList[index].equalizingChargingTime = element.equalizingChargingTime
-                    self.settingList[index].boostChargingTime = element.boostChargingTime
-                    self.settingList[index].equalizingChargingInterval = element.equalizingChargingInterval
-                    self.settingList[index].temperatureCompensation = element.temperatureCompensation
+                    self.settingList[index].overVoltageThreshold = mpptData.setting.overVoltageThreshold
+                    self.settingList[index].chargingLimitVoltage = mpptData.setting.chargingLimitVoltage
+                    self.settingList[index].equalizingChargingVoltage = mpptData.setting.equalizingChargingVoltage
+                    self.settingList[index].boostChargingVoltage = mpptData.setting.boostChargingVoltage
+                    self.settingList[index].floatingChargingVoltage = mpptData.setting.floatingChargingVoltage
+                    self.settingList[index].boostChargingRecoveryVoltage = mpptData.setting.boostChargingRecoveryVoltage
+                    self.settingList[index].overDischargeRecoveryVoltage = mpptData.setting.overDischargeRecoveryVoltage
+                    self.settingList[index].underVoltageThreshold = mpptData.setting.underVoltageThreshold
+                    self.settingList[index].overDischargeVoltage = mpptData.setting.overDischargeVoltage
+                    self.settingList[index].overDischargeLimitVoltage = mpptData.setting.overDischargeLimitVoltage
+                    self.settingList[index].endOfCharge = mpptData.setting.endOfCharge
+                    self.settingList[index].endOfDischarge = mpptData.setting.endOfDischarge
+                    self.settingList[index].overDischargeTimeDelay = mpptData.setting.overDischargeTimeDelay
+                    self.settingList[index].equalizingChargingTime = mpptData.setting.equalizingChargingTime
+                    self.settingList[index].boostChargingTime = mpptData.setting.boostChargingTime
+                    self.settingList[index].equalizingChargingInterval = mpptData.setting.equalizingChargingInterval
+                    self.settingList[index].temperatureCompensation = mpptData.setting.temperatureCompensation
                     return
             self.settingList.append(mpptData.setting)
+        if (mpptData.loadMode is not None) :
+            for index, element in enumerate(self.loadModeList) :
+                if element.slaveId == mpptData.slaveId :
+                    self.loadModeList[index].slaveId = mpptData.loadMode.slaveId
+                    self.loadModeList[index].counter += 1
+                    self.loadModeList[index].loadMode = mpptData.loadMode.loadMode
+                    return
+            self.loadModeList.append(mpptData.loadMode)
+
+        if (mpptData.loadInfo is not None) :
+            for index, element in enumerate(self.loadInfoList) :
+                if element.slaveId == mpptData.slaveId :
+                    self.loadInfoList[index].slaveId = mpptData.loadInfo.slaveId
+                    self.loadInfoList[index].counter += 1
+                    self.loadInfoList[index].loadStatus = mpptData.loadInfo.loadStatus
+                    self.loadInfoList[index].loadBrightness = mpptData.loadInfo.loadBrightness
+                    self.loadInfoList[index].chargingState = mpptData.loadInfo.chargingState
+                    return
+            self.loadInfoList.append(mpptData.loadInfo)
 
     def getInfo(self) -> list[dict] :
         result : list[dict] = []
@@ -228,8 +294,15 @@ class MpptDataCollection() :
                 "pv_voltage" : element.pvVoltage,
                 "pv_current" : element.pvCurrent,
                 "pv_power" : element.pvPower,
-                "load_status" : element.loadStatus
             }
+            for dat in self.loadInfoList :
+                if dat.slaveId == element.slaveId :
+                    dataDict['load_status'] = dat.loadStatus
+                    dataDict['load_brightness'] = dat.loadBrightness
+                    dataDict['charging_state'] = dat.chargingState
+            for dat in self.loadModeList :
+                if dat.slaveId == element.slaveId :
+                    dataDict['load_mode'] = dat.loadMode
             result.append(dataDict)
         return result
     
@@ -257,11 +330,11 @@ class MpptDataCollection() :
                 "equalizing_charging_interval" : element.equalizingChargingInterval,
                 "temperature_compensation" : element.temperatureCompensation
             }
+            for dat in self.loadModeList :
+                if dat.slaveId == element.slaveId :
+                    dataDict['load_mode'] = dat.loadMode
             result.append(dataDict)
-        return result
-    
-    
-        
+        return result        
 
 class ModbusRegisterList() :
     """
@@ -378,9 +451,10 @@ class ModbusHandler(threading.Thread) :
                     rr = self.modbusSerialClient.read_holding_registers(read['start_register'], read['quantity'], unit = element.slaveid)
                     self.modbusSerialClient.close()
                     mb = ModbusResponseBuffer(read['name'], element.slaveid, rr.registers)
+                    mb.print()
                     md = MpptData(mb)
                     self.mpptDataCollection.insertData(md)
-                    print()
+                    
                 except :
                     print("failed to request modbus")
                 time.sleep(0.2)
