@@ -56,6 +56,10 @@ class Setting() :
         self.slaveId : int = 0
         self.counter : int = 0
         self.lastCounter : int = 0
+        self.nominalBatCap : int = 0
+        self.systemVoltage : int = 0
+        self.recognizedVoltage : int = 0
+        self.batteryType : int = 0
         self.overVoltageThreshold = 0
         self.chargingLimitVoltage = 0
         self.equalizingChargingVoltage = 0
@@ -144,7 +148,7 @@ class MpptData() :
             info = Info() 
             self.slaveId = modbusResponseBuffer.slaveId
             info.slaveId = modbusResponseBuffer.slaveId
-            info.batCapacity = modbusResponseBuffer.register[0]
+            info.batCapacity = modbusResponseBuffer.register[0] & 0xFF
             info.batVoltage = modbusResponseBuffer.register[1]
             info.chargeCurrent = modbusResponseBuffer.register[2]
             info.controllerTemperature = modbusResponseBuffer.register[3] >> 8
@@ -162,23 +166,27 @@ class MpptData() :
             setting = Setting()
             self.slaveId = modbusResponseBuffer.slaveId
             setting.slaveId = modbusResponseBuffer.slaveId
-            setting.overVoltageThreshold = modbusResponseBuffer.register[0]
-            setting.chargingLimitVoltage = modbusResponseBuffer.register[1]
-            setting.equalizingChargingVoltage = modbusResponseBuffer.register[2]
-            setting.boostChargingVoltage = modbusResponseBuffer.register[3]
-            setting.floatingChargingVoltage = modbusResponseBuffer.register[4]
-            setting.boostChargingRecoveryVoltage = modbusResponseBuffer.register[5]
-            setting.overDischargeRecoveryVoltage = modbusResponseBuffer.register[6]
-            setting.underVoltageThreshold = modbusResponseBuffer.register[7]
-            setting.overDischargeVoltage = modbusResponseBuffer.register[8]
-            setting.overDischargeLimitVoltage = modbusResponseBuffer.register[9]
-            setting.endOfCharge = modbusResponseBuffer.register[10] >> 8
-            setting.endOfDischarge = modbusResponseBuffer.register[10] & 0xFF
-            setting.overDischargeTimeDelay = modbusResponseBuffer.register[11]
-            setting.equalizingChargingTime = modbusResponseBuffer.register[12]
-            setting.boostChargingTime = modbusResponseBuffer.register[13]
-            setting.equalizingChargingInterval = modbusResponseBuffer.register[14]
-            setting.temperatureCompensation = modbusResponseBuffer.register[15]
+            setting.nominalBatCap = modbusResponseBuffer.register[0]
+            setting.systemVoltage = modbusResponseBuffer.register[1] >> 8
+            setting.recognizedVoltage = modbusResponseBuffer.register[1] & 0xFF
+            setting.batteryType = modbusResponseBuffer.register[2]
+            setting.overVoltageThreshold = modbusResponseBuffer.register[3]
+            setting.chargingLimitVoltage = modbusResponseBuffer.register[4]
+            setting.equalizingChargingVoltage = modbusResponseBuffer.register[5]
+            setting.boostChargingVoltage = modbusResponseBuffer.register[6]
+            setting.floatingChargingVoltage = modbusResponseBuffer.register[7]
+            setting.boostChargingRecoveryVoltage = modbusResponseBuffer.register[8]
+            setting.overDischargeRecoveryVoltage = modbusResponseBuffer.register[9]
+            setting.underVoltageThreshold = modbusResponseBuffer.register[10]
+            setting.overDischargeVoltage = modbusResponseBuffer.register[11]
+            setting.overDischargeLimitVoltage = modbusResponseBuffer.register[12]
+            setting.endOfCharge = modbusResponseBuffer.register[13] >> 8
+            setting.endOfDischarge = modbusResponseBuffer.register[13] & 0xFF
+            setting.overDischargeTimeDelay = modbusResponseBuffer.register[14]
+            setting.equalizingChargingTime = modbusResponseBuffer.register[15]
+            setting.boostChargingTime = modbusResponseBuffer.register[16]
+            setting.equalizingChargingInterval = modbusResponseBuffer.register[17]
+            setting.temperatureCompensation = modbusResponseBuffer.register[18]
             self.setting = copy.deepcopy(setting)
         elif (modbusResponseBuffer.identifier == "load_mode") :
             print("load mode")
@@ -263,6 +271,10 @@ class MpptDataCollection() :
                 if element.slaveId == mpptData.slaveId :
                     self.settingList[index].slaveId = mpptData.setting.slaveId
                     self.settingList[index].counter += 1
+                    self.settingList[index].nominalBatCap = mpptData.setting.nominalBatCap
+                    self.settingList[index].systemVoltage = mpptData.setting.systemVoltage
+                    self.settingList[index].recognizedVoltage = mpptData.setting.recognizedVoltage
+                    self.settingList[index].batteryType = mpptData.setting.batteryType
                     self.settingList[index].overVoltageThreshold = mpptData.setting.overVoltageThreshold
                     self.settingList[index].chargingLimitVoltage = mpptData.setting.chargingLimitVoltage
                     self.settingList[index].equalizingChargingVoltage = mpptData.setting.equalizingChargingVoltage
@@ -349,6 +361,10 @@ class MpptDataCollection() :
             dataDict :dict = {
                 "slave_id" : element.slaveId,
                 "counter" : element.counter,
+                "nominal_battery_capacity" : element.nominalBatCap,
+                "system_voltage" : element.systemVoltage,
+                "recognized_voltage" : element.recognizedVoltage,
+                "battery_type" : element.batteryType,
                 "overvoltage_threshold" : element.overVoltageThreshold,
                 "charging_limit_voltage" : element.chargingLimitVoltage,
                 "equalizing_charging_voltage" : element.equalizingChargingVoltage,
@@ -433,7 +449,7 @@ class ModbusHandler(threading.Thread) :
         self.isRun = False
         self.writeQueue = queue.Queue()
         self.modbusRegisterList : list[ModbusRegisterList] = copy.deepcopy(modbusRegisterList)
-        self.inc = 0
+        self._inc = 0
 
     def putToQueue(self, modbusMessage : ModbusMessage) :
         """ Put the modbus message into class queue to be further processed
@@ -455,8 +471,8 @@ class ModbusHandler(threading.Thread) :
     def run(self) :
         self.isRun = True
         while self.isRun :
-            if self.inc >= len(self.modbusRegisterList) :
-                self.inc = 0
+            if self._inc >= len(self.modbusRegisterList) :
+                self._inc = 0
             
             while not self.writeQueue.empty() : #check if the writequeue not empty
                 message : ModbusMessage = self.writeQueue.get()
@@ -475,7 +491,7 @@ class ModbusHandler(threading.Thread) :
                     # rr = self.modbusSerialClient.write_register(message.slaveId,)
                 time.sleep(0.2)
             
-            element = self.modbusRegisterList[self.inc]
+            element = self.modbusRegisterList[self._inc]
             
             for read in element.readSection :
                 # print("Slave id :", element.slaveid)
@@ -495,7 +511,7 @@ class ModbusHandler(threading.Thread) :
                 except :
                     print("failed to request modbus")
                 time.sleep(0.2)
-            self.inc += 1
+            self._inc += 1
     
     def getWriteRegisterAddress(self, modbusMessage : ModbusMessage) -> int :
         """ Get the address of register. Since the ModbusMessage contain only register name not the address, it need to search the suitable address

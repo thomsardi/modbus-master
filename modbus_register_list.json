@@ -10,8 +10,8 @@
                 },
                 {
                     "name" : "battery_setting",
-                    "start_register" : 57349,
-                    "quantity" : 16
+                    "start_register" : 57346,
+                    "quantity" : 19
                 },
                 {
                     "name" : "load_mode",
