@@ -3,6 +3,7 @@ import threading
 import queue
 import copy
 import time
+from typing import List
 
 class ModbusResponseBuffer() :
     def __init__(self, identifier : str, slaveId : int, register : list) -> None:
@@ -209,10 +210,10 @@ class MpptData() :
 
 class MpptDataCollection() :
     def __init__(self) -> None:
-        self.infoList : list[Info] = []
-        self.settingList : list[Setting] = []
-        self.loadModeList : list[LoadMode] = []
-        self.loadInfoList : list[LoadInfo] = []
+        self.infoList : List[Info] = []
+        self.settingList : List[Setting] = []
+        self.loadModeList : List[LoadMode] = []
+        self.loadInfoList : List[LoadInfo] = []
 
     def print(self) :
         for element in self.infoList :
@@ -314,14 +315,14 @@ class MpptDataCollection() :
                     return
             self.loadInfoList.append(mpptData.loadInfo)
 
-    def getInfo(self) -> list[dict] :
+    def getInfo(self) -> List[dict] :
         """
         Convert from list of Info data into dictionary JSON file for http request
 
         Returns :
-        list[dict] : list of dictionary, the number of list is equal as the number of stored Info object data
+        List[dict] : list of dictionary, the number of list is equal as the number of stored Info object data
         """
-        result : list[dict] = []
+        result : List[dict] = []
         for element in self.infoList :
             dataDict :dict = {
                 "slave_id" : element.slaveId,
@@ -349,14 +350,14 @@ class MpptDataCollection() :
             result.append(dataDict)
         return result
     
-    def getSetting(self) -> list[dict] :
+    def getSetting(self) -> List[dict] :
         """
         Convert from list of Setting data into dictionary JSON file for http request
 
         Returns :
-        list[dict] : list of dictionary, the number of list is equal as the number of stored Setting object data
+        List[dict] : list of dictionary, the number of list is equal as the number of stored Setting object data
         """
-        result : list[dict] = []
+        result : List[dict] = []
         for element in self.settingList :
             dataDict :dict = {
                 "slave_id" : element.slaveId,
@@ -400,10 +401,10 @@ class ModbusRegisterList() :
         configFile (dict) : config file as dict type file, refer to modbus_register_list.json
         """
         self.slaveid = configFile['slave_id']
-        self.writeSection : list[dict] = []
+        self.writeSection : List[dict] = []
         for element in configFile['write_section'] :
             self.writeSection.append(element)
-        self.readSection : list[dict] = []
+        self.readSection : List[dict] = []
         for element in configFile['read_section'] :
             self.readSection.append(element)
 
@@ -436,11 +437,11 @@ class ModbusMessage() :
 class ModbusHandler(threading.Thread) :
     """ ModbusHandler is a thread class that handle the reading and writing of modbus data. Treat this class as a threading.Thread
     """
-    def __init__(self, modbusRegisterList : list[ModbusRegisterList]):
+    def __init__(self, modbusRegisterList : List[ModbusRegisterList]):
         """ Class initialization
         
         Args:
-        modbusRegisterList (list[ModbusRegisterList]) : list of ModbusRegisterList, this argument is a guide book to which register to read and write
+        modbusRegisterList (List[ModbusRegisterList]) : list of ModbusRegisterList, this argument is a guide book to which register to read and write
         """
         threading.Thread.__init__(self)
         self.mpptDataCollection : MpptDataCollection = MpptDataCollection()
@@ -448,7 +449,7 @@ class ModbusHandler(threading.Thread) :
         self.daemon = True
         self.isRun = False
         self.writeQueue = queue.Queue()
-        self.modbusRegisterList : list[ModbusRegisterList] = copy.deepcopy(modbusRegisterList)
+        self.modbusRegisterList : List[ModbusRegisterList] = copy.deepcopy(modbusRegisterList)
         self._inc = 0
 
     def putToQueue(self, modbusMessage : ModbusMessage) :
@@ -510,6 +511,8 @@ class ModbusHandler(threading.Thread) :
                     
                 except :
                     print("failed to request modbus")
+                time.sleep(0.2)
+            if (len(self.modbusRegisterList) <= 0) :
                 time.sleep(0.2)
             self._inc += 1
     

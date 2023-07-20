@@ -3,6 +3,7 @@ from modbusHandler import ModbusHandler, ModbusRegisterList, ModbusMessage
 import json
 import time
 from httpserver import Server
+from typing import List
 
 def main() :
     registerListFile = json.load(open('modbus_register_list.json')) #convert the json file into dict
@@ -12,7 +13,7 @@ def main() :
     config = configFile['config'] #get the content of 'config' key
     portName = configFile['port_name'] #get the content of 'port_name' key
     isUpdate = configFile['update'] #get the content of 'update' key
-    modbusRegisterList : list[ModbusRegisterList] = [] #create list
+    modbusRegisterList : List[ModbusRegisterList] = [] #create list
     # client = ModbusSerialClient(method='rtu', port='COM7', timeout=1, baudrate=9600)
     client = ModbusSerialClient(method='rtu', port=portName, timeout=1, baudrate=9600) #create ModbusSerialClient object with rtu method, 8,N,1,9600
     for element in registerList :
@@ -66,7 +67,7 @@ if __name__ == "__main__" :
     config = configFile['config'] #get the content of 'config' key
     portName = configFile['port_name'] #get the content of 'port_name' key
     isUpdate = configFile['update'] #get the content of 'update' key
-    modbusRegisterList : list[ModbusRegisterList] = [] #create list
+    modbusRegisterList : List[ModbusRegisterList] = [] #create list
     # client = ModbusSerialClient(method='rtu', port='COM7', timeout=1, baudrate=9600)
     client = ModbusSerialClient(method='rtu', port=portName, timeout=1, baudrate=9600) #create ModbusSerialClient object with rtu method, 8,N,1,9600
     for element in registerList :
@@ -99,7 +100,7 @@ if __name__ == "__main__" :
     count = 0
     while(1) :
         time.sleep(0.1)
-        print("length :", len(modbusHandler.mpptDataCollection.infoList))
+        # print("length :", len(modbusHandler.mpptDataCollection.infoList))
         count += 1
         if count >= 50 :
             modbusHandler.mpptDataCollection.cleanUp()
