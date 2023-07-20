@@ -5,6 +5,8 @@ import time
 from httpserver import Server
 from typing import List
 
+print("Modbus Handler for Python3.7.3")
+
 def main() :
     registerListFile = json.load(open('modbus_register_list.json')) #convert the json file into dict
     registerList = registerListFile['device'] #get the content of 'device' key
