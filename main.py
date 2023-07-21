@@ -1,5 +1,6 @@
 from pymodbus.client.sync import ModbusSerialClient
 from modbusHandler import ModbusHandler, ModbusRegisterList, ModbusMessage
+from mppt import MpptSrne
 import json
 import time
 from httpserver import Server
@@ -61,7 +62,25 @@ def main() :
     # print(c.read_holding_registers(256,11,1).registers)
     # c.close()
 
+def scanSlave(method : str, portName : str, timeout : float, baudrate : int) -> list :
+    client = ModbusSerialClient(method=method, port=portName, timeout=timeout, baudrate=baudrate)
+    slaveList : list = []
+    print("Start slave scan")
+    for i in range(1,247,1) :
+        client.connect()
+        rr = client.read_holding_registers(address=257, count=1, unit=i)
+        if (rr.isError()) :
+            print(f"Slave id {i} not found")
+            client.close()    
+            continue
+        print(f"Slave id {i} found")
+        slaveList.append(i)
+        client.close()
+    print("Slave scan finished")
+    return slaveList
+
 if __name__ == "__main__" :
+    
     registerListFile = json.load(open('modbus_register_list.json')) #convert the json file into dict
     registerList = registerListFile['device'] #get the content of 'device' key
     # configFile = json.load(open('modbus_config.json'))
@@ -71,6 +90,9 @@ if __name__ == "__main__" :
     isUpdate = configFile['update'] #get the content of 'update' key
     modbusRegisterList : List[ModbusRegisterList] = [] #create list
     # client = ModbusSerialClient(method='rtu', port='COM7', timeout=1, baudrate=9600)
+    # print(scanSlave('rtu', portName=portName, timeout=0.05, baudrate=9600))
+    scanner = MpptSrne(method='rtu', port=portName, timeout=0.05, baudrate=9600)
+    print(scanner.startScan())
     client = ModbusSerialClient(method='rtu', port=portName, timeout=1, baudrate=9600) #create ModbusSerialClient object with rtu method, 8,N,1,9600
     for element in registerList :
         mc = ModbusRegisterList(element) #convert the formatted dict into ModbusRegisterList
