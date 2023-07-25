@@ -6,12 +6,16 @@
             "slave_id" : 172,
             "param" : [
                 {
-                    "name" : "batt_type",
-                    "value" : 0
+                    "name" : "batt_cap",
+                    "value" : 850
                 },
                 {
                     "name" : "system_voltage",
                     "value" : 12336
+                },
+                {
+                    "name" : "batt_type",
+                    "value" : 0
                 },
                 {
                     "name" : "overvoltage_threshold",
@@ -52,6 +56,10 @@
                 {
                     "name" : "over_discharge_limit_voltage",
                     "value" : 106
+                },
+                {
+                    "name" : "end_of_charge_discharge_capacity",
+                    "value" : 25650
                 },
                 {
                     "name" : "over_discharge_time_delay",

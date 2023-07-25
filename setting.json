@@ -1,0 +1,88 @@
+{
+    "param": [
+        {
+            "name" : "batt_cap",
+            "value" : 850
+        },
+        {
+            "name" : "system_voltage",
+            "value" : 12336
+        },
+        {
+            "name" : "batt_type",
+            "value" : 0
+        },
+        {
+            "name" : "overvoltage_threshold",
+            "value" : 147
+        },
+        {
+            "name" : "charging_voltage_limit",
+            "value" : 145
+        },
+        {
+            "name" : "equalizing_charging_voltage",
+            "value" : 146
+        },
+        {
+            "name" : "boost_charging_voltage",
+            "value" : 144
+        },
+        {
+            "name" : "floating_charging_voltage",
+            "value" : 138
+        },
+        {
+            "name" : "boost_charging_recovery_voltage",
+            "value" : 132
+        },
+        {
+            "name" : "over_discharge_recovery_voltage",
+            "value" : 120
+        },
+        {
+            "name" : "under_voltage_threshold",
+            "value" : 118
+        },
+        {
+            "name" : "over_discharge_voltage",
+            "value" : 118
+        },
+        {
+            "name" : "over_discharge_limit_voltage",
+            "value" : 116
+        },
+        {
+            "name" : "end_of_charge_discharge_capacity",
+            "value" : 25650
+        },
+        {
+            "name" : "over_discharge_time_delay",
+            "value" : 5
+        },
+        {
+            "name" : "equalizing_charging_time",
+            "value" : 0
+        },
+        {
+            "name" : "boost_charging_time",
+            "value" : 120
+        },
+        {
+            "name" : "equalizing_charging_interval",
+            "value" : 0
+        },
+        {
+            "name" : "temperature_compensation",
+            "value" : 0
+        },
+        {
+            "name": "load_mode",
+            "value": 15
+        },
+        {
+            "name" : "load_command",
+            "value" : 1
+        }
+    ]
+}

@@ -6,20 +6,24 @@
             "slave_id": 172,
             "param": [
                 {
-                    "name" : "batt_type",
-                    "value" : 0
+                    "name" : "batt_cap",
+                    "value" : 850
                 },
                 {
                     "name" : "system_voltage",
                     "value" : 12336
                 },
                 {
+                    "name" : "batt_type",
+                    "value" : 0
+                },
+                {
                     "name" : "overvoltage_threshold",
-                    "value" : 148
+                    "value" : 147
                 },
                 {
                     "name" : "charging_voltage_limit",
-                    "value" : 147
+                    "value" : 145
                 },
                 {
                     "name" : "equalizing_charging_voltage",
@@ -39,19 +43,23 @@
                 },
                 {
                     "name" : "over_discharge_recovery_voltage",
-                    "value" : 126
-                },
-                {
-                    "name" : "under_voltage_threshold",
                     "value" : 120
                 },
                 {
+                    "name" : "under_voltage_threshold",
+                    "value" : 118
+                },
+                {
                     "name" : "over_discharge_voltage",
-                    "value" : 111
+                    "value" : 118
                 },
                 {
                     "name" : "over_discharge_limit_voltage",
-                    "value" : 106
+                    "value" : 116
+                },
+                {
+                    "name" : "end_of_charge_discharge_capacity",
+                    "value" : 25650
                 },
                 {
                     "name" : "over_discharge_time_delay",
@@ -87,20 +95,24 @@
             "slave_id": 173,
             "param": [
                 {
-                    "name" : "batt_type",
-                    "value" : 0
+                    "name" : "batt_cap",
+                    "value" : 850
                 },
                 {
                     "name" : "system_voltage",
                     "value" : 12336
                 },
                 {
+                    "name" : "batt_type",
+                    "value" : 0
+                },
+                {
                     "name" : "overvoltage_threshold",
-                    "value" : 148
+                    "value" : 147
                 },
                 {
                     "name" : "charging_voltage_limit",
-                    "value" : 147
+                    "value" : 145
                 },
                 {
                     "name" : "equalizing_charging_voltage",
@@ -120,19 +132,23 @@
                 },
                 {
                     "name" : "over_discharge_recovery_voltage",
-                    "value" : 126
-                },
-                {
-                    "name" : "under_voltage_threshold",
                     "value" : 120
                 },
                 {
+                    "name" : "under_voltage_threshold",
+                    "value" : 118
+                },
+                {
                     "name" : "over_discharge_voltage",
-                    "value" : 111
+                    "value" : 118
                 },
                 {
                     "name" : "over_discharge_limit_voltage",
-                    "value" : 106
+                    "value" : 116
+                },
+                {
+                    "name" : "end_of_charge_discharge_capacity",
+                    "value" : 25650
                 },
                 {
                     "name" : "over_discharge_time_delay",
@@ -168,20 +184,24 @@
             "slave_id": 174,
             "param": [
                 {
-                    "name" : "batt_type",
-                    "value" : 0
+                    "name" : "batt_cap",
+                    "value" : 850
                 },
                 {
                     "name" : "system_voltage",
                     "value" : 12336
                 },
                 {
+                    "name" : "batt_type",
+                    "value" : 0
+                },
+                {
                     "name" : "overvoltage_threshold",
-                    "value" : 148
+                    "value" : 147
                 },
                 {
                     "name" : "charging_voltage_limit",
-                    "value" : 147
+                    "value" : 145
                 },
                 {
                     "name" : "equalizing_charging_voltage",
@@ -201,19 +221,23 @@
                 },
                 {
                     "name" : "over_discharge_recovery_voltage",
-                    "value" : 126
-                },
-                {
-                    "name" : "under_voltage_threshold",
                     "value" : 120
                 },
                 {
+                    "name" : "under_voltage_threshold",
+                    "value" : 118
+                },
+                {
                     "name" : "over_discharge_voltage",
-                    "value" : 111
+                    "value" : 118
                 },
                 {
                     "name" : "over_discharge_limit_voltage",
-                    "value" : 106
+                    "value" : 116
+                },
+                {
+                    "name" : "end_of_charge_discharge_capacity",
+                    "value" : 25650
                 },
                 {
                     "name" : "over_discharge_time_delay",
