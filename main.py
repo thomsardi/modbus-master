@@ -91,8 +91,10 @@ if __name__ == "__main__" :
     modbusRegisterList : List[ModbusRegisterList] = [] #create list
     # client = ModbusSerialClient(method='rtu', port='COM7', timeout=1, baudrate=9600)
     # print(scanSlave('rtu', portName=portName, timeout=0.05, baudrate=9600))
-    # scanner = MpptSrne(method='rtu', port=portName, timeout=0.05, baudrate=9600)
-    # print(scanner.startScan())
+    scanner = MpptSrne(method='rtu', port=portName, timeout=0.1, baudrate=9600)
+    scanner.startId = 170
+    scanner.endId = 250 #avoid scanning id > 250
+    print(scanner.startScan())
     client = ModbusSerialClient(method='rtu', port=portName, timeout=1, baudrate=9600) #create ModbusSerialClient object with rtu method, 8,N,1,9600
     for element in registerList :
         mc = ModbusRegisterList(element) #convert the formatted dict into ModbusRegisterList
