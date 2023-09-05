@@ -1,6 +1,6 @@
 {
     "port_name": "/dev/ttyS0",
-    "update": 1,
+    "update": 0,
     "config": [
         {
             "slave_id": 10,
@@ -19,7 +19,7 @@
                 },
                 {
                     "name" : "overvoltage_threshold",
-                    "value" : 160
+                    "value" : 147
                 },
                 {
                     "name" : "charging_voltage_limit",
@@ -27,15 +27,15 @@
                 },
                 {
                     "name" : "equalizing_charging_voltage",
-                    "value" : 140
+                    "value" : 146
                 },
                 {
                     "name" : "boost_charging_voltage",
-                    "value" : 140
+                    "value" : 144
                 },
                 {
                     "name" : "floating_charging_voltage",
-                    "value" : 140
+                    "value" : 138
                 },
                 {
                     "name" : "boost_charging_recovery_voltage",

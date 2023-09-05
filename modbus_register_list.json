@@ -1,7 +1,7 @@
 {
     "device" : [
         {
-            "slave_id" : 172,
+            "slave_id" : 8,
             "read_section" : [
                 {
                     "name" : "batt_load_solar_info",
